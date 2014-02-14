@@ -1,10 +1,6 @@
-Planes
+Flappy times ahoy!
 ============
-Javascript implementation of a simple plane game originally implemented in Dart.
-
-WARNING
-=======
-Major refactor is currently underway. For those about to code, we salute you!
+It's like that helicopter game that spawned a popular clone, which somehow made a ton of coin.
 
 Documentation
 -------------
@@ -14,3 +10,4 @@ Other deets
 -----------
 Dependency management: require.js
 DOM wizardry: jQuery
+templates: jshaml

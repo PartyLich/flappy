@@ -18,8 +18,10 @@ require.config({
     'coord': 'models/coord',
     'hue': 'models/hue',
     'path': 'models/path',
-    'plane': 'models/plane',
-    'StopWatch': 'models/StopWatch',
+//    'plane': 'models/plane',
+    'player': 'models/player',
+    'pipe': 'models/pipe',
+    'StopWatch': 'models/StopWatch'
   },
   //Shim config FTW: http://requirejs.org/docs/api.html#config-shim
   shim: {
