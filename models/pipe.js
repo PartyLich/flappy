@@ -68,7 +68,7 @@ define(['coord','ball', 'path', 'animation'], function(Coord, Ball, Path, Animat
     this.dead = false;
 
     //Gap size / 2
-    this.gap = 50;
+    this.gap = 75;
   }
 
   //Inherit Ball
