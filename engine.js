@@ -612,6 +612,7 @@ function (require, Coord, Ball, Hue, Path, Pipe, Action, Player, StopWatch, Medi
 
       //Player Collision detection
       var userHalf = user.width/2;
+          userHalfY = user.height/2;
 
       if(user.y + userHalf >= cY) {
         //Hit the floor.
@@ -624,8 +625,8 @@ function (require, Coord, Ball, Hue, Path, Pipe, Action, Player, StopWatch, Medi
           break;
         }
 
-        if(user.y > objList[i].y + objList[i].gap ||
-           user.y < objList[i].y - objList[i].gap) {
+        if(user.y + userHalfY > objList[i].y + objList[i].gap ||
+           user.y - userHalfY < objList[i].y - objList[i].gap) {
           //Collision! oh noes!
 
           //Start crash sequences
