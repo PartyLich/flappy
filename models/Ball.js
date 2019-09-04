@@ -27,6 +27,38 @@ define(['Coord'], function (Coord) {
       ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, true);
       ctx.fill();
     }
+
+    /**
+     * Return left of rectangular bounding box
+     * @return {number} edge of rectangular bounding box
+     */
+    get left() {
+      return this.x - this.radius;
+    }
+
+    /**
+     * Return right of rectangular bounding box
+     * @return {number} edge of rectangular bounding box
+     */
+    get right() {
+      return this.x + this.radius;
+    }
+
+    /**
+     * Return top of rectangular bounding box
+     * @return {number} edge of rectangular bounding box
+     */
+    get top() {
+      return this.y - this.radius;
+    }
+
+    /**
+     * Return bottom of rectangular bounding box
+     * @return {number} edge of rectangular bounding box
+     */
+    get bottom() {
+      return this.y + this.radius;
+    }
   }
 
   return Ball;
