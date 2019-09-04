@@ -534,21 +534,8 @@ function (require, Coord, Pipe, Player, StopWatch,
     function collisionDetection(index, obj) {
       if (obj instanceof Pipe) {
         // console.log("obj is a Pipe!");
-        if (obj.x + obj.width/2 <= 5) { // Pipe is off screen.
-          // Increment score.
-          mediator.publish('score:pipe');
-          score++;
-
-          // kill pipe
-          obj.die();
-
-          // add new pipe
-          addPipe();
-
-          return true;
-        }
+        if (handlePipeCollision(obj)) return true;
       }
-
 
       // Player Collision detection
       const userHalf = user.width/2;
@@ -578,6 +565,24 @@ function (require, Coord, Pipe, Player, StopWatch,
       return false;
     }
 
+    /**
+     * [handlePipeCollision description]
+     * @param {object} obj
+     */
+    function handlePipeCollision(obj) {
+      if (obj.x + obj.width/2 <= 5) { // Pipe is off screen.
+        // Increment score.
+        mediator.publish('score:pipe');
+        score++;
+
+        // kill pipe
+        obj.die();
+        // add new pipe
+        addPipe();
+
+        return true;
+      }
+    }
 
     /**
      * @param {String} src
