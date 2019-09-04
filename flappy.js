@@ -32,10 +32,10 @@ require.config({
 require(['jquery', 'haml', 'engine'], function ($, Haml, Engine) {
   $(function () {
     // RequestAnimationFrame shim
-    var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-        window.webkitRequestAnimationFrame || window.msRequestAnimationFrame,
-        //
-        engine = new Engine();
+    const requestAnimationFrame = window.requestAnimationFrame
+        || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame
+        || window.msRequestAnimationFrame;
+    const engine = new Engine();
 
     window.requestAnimationFrame = requestAnimationFrame;
 
