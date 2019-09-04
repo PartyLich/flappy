@@ -79,7 +79,6 @@ define(['Coord', 'ball', 'animation'], function (
      *  @return {Number} Heading in radians.
      */
     getHeading() {
-      // console.log('Heading atan2('+ this.vy +'/'+ this.vx +'): ' + Math.atan2(this.vy, this.vx) +');
       return Math.atan2(this.vy, this.vx);
     }
 
@@ -180,7 +179,6 @@ define(['Coord', 'ball', 'animation'], function (
 
       // Restore context state.
       ctx.restore();
-      //    console.log('frame', this.frame, 'frameX', this.frameX, 'frameY', this.frameY);
 
       // Advance animation frame.
       if (
