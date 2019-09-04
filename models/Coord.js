@@ -2,83 +2,71 @@ define(function () {
 
   /** Coordinate object. Represents a point in 2-space.
    */
-  function Coord(opt) {
-    this.x = 0;
-    this.y = 0;
-    this.initialize(opt);
-  //  this.x = (x || 0);
-  //  this.y = (y || 0);
+  class Coord {
+    constructor({x = 0, y = 0} = {}) {
+      this.x = x;
+      this.y = y;
+    }
+
+    /** Move this Coord to a new (x, y) location.
+     * @param {Number} x
+     * @param {Number} y
+     * @return {Coord}
+     */
+    move(x, y) {
+      this.x = x;
+      this.y = y;
+
+      return this;
+    }
+
+    /** Add [Coord] other to this and return the result.
+     * @param {Coord} other
+     * @return {Coord}
+     */
+    plus(other) {
+      const x = this.x + other.x;
+      const y = this.y + other.y;
+      return new Coord({x, y});
+    }
+
+    /** Subtracts [Coord] other from this and return the result.
+     * @param {Coord} other
+     * @return {Coord}
+     */
+    minus(other) {
+      const x = this.x - other.x;
+      const y = this.y - other.y;
+      return new Coord({x, y});
+    }
+
+    /** Scales this [Coord] by the factor specified.
+     * @param {Number} scale
+     * @return {Coord}
+     */
+    scale(scale) {
+      const x = this.x * scale;
+      const y = this.y * scale;
+      return new Coord({x, y});
+    }
+
+    /** Returns distance from this [Coord] to [Coord] b.
+     * @param {Coord}
+     * @return {Coord}
+     */
+    dist(b) {
+      return Math.sqrt(
+          (this.x - b.x) * (this.x - b.x) + (this.y - b.y) * (this.y - b.y)
+      );
+    }
+
+    /** Returns the midpoint of this [Coord] and [Coord] b.
+     * @param {Coord}
+     */
+    midpoint(b) {
+      return new Coord({x: (this.x + b.x) / 2, y: (this.y + b.y) / 2});
+    }
   }
-
-
-  Coord.prototype.initialize = function (opt) {
-    var key = null,
-        default_args = {
-          x : 0,
-          y : 0
-        };
-
-    opt = (opt || default_args);
-
-    for(key in default_args) {
-      if(typeof opt[key] == "undefined") opt[key] = default_args[key];
-    }
-
-    // opt[] has all the data - user provided and optional.
-    for(key in opt) {
-      //console.log(key + " = " + opt[key]);
-      this[key] = opt[key];
-    }
-  };
-
-
-  /** Move this Coord to a new (x, y) location.
-   * @param {Number} x
-   * @param {Number} y
-   */
-  Coord.prototype.move = function (x, y) {
-    this.x = x;
-    this.y = y;
-
-    return this;
-  };
-
-  /** Add [Coord] other to this and return the result.
-   * @param {Coord} other
-   */
-  Coord.prototype.plus = function (other) {
-    return new Coord({x : this.x + other.x, y : this.y + other.y});
-  };
-
-  /** Subtracts [Coord] other from this and return the result.
-   * @param {Coord} other
-   */
-  Coord.prototype.minus = function (other) {
-    return new Coord({x : this.x - other.x, y : this.y - other.y});
-  };
-
-  /** Scales this [Coord] by the factor specified.
-   * @param {Number} scale
-   */
-  Coord.prototype.scale = function (scale) {
-    return new Coord({x : this.x * scale, y : this.y * scale});
-  };
-
-  /** Returns distance from this [Coord] to [Coord] b.
-   * @param {Coord}
-   */
-  Coord.prototype.dist = function (b) {
-    return Math.sqrt((this.x - b.x)*(this.x - b.x) + (this.y - b.y)*(this.y - b.y));
-  };
-
-  /** Returns the midpoint of this [Coord] and [Coord] b.
-   * @param {Coord}
-   */
-  Coord.prototype.midpoint = function (b) {
-    return new Coord({x : (this.x + b.x) / 2, y : (this.y + b.y) / 2});
-  //  return new Coord((this.x + b.x) / 2, (this.y + b.y) / 2);
-  };
-
 
   return Coord;
 });
