@@ -258,6 +258,38 @@ define(['Coord', 'ball', 'animation'], function (
       this.fCount = 0;
       this.updateFrame();
     }
+
+    /**
+     * Return left of rectangular bounding box
+     * @return {number} edge of rectangular bounding box
+     */
+    get left() {
+      return this.x - this.width / 2;
+    }
+
+    /**
+     * Return right of rectangular bounding box
+     * @return {number} edge of rectangular bounding box
+     */
+    get right() {
+      return this.x + this.width / 2;
+    }
+
+    /**
+     * Return top of rectangular bounding box
+     * @return {number} edge of rectangular bounding box
+     */
+    get top() {
+      return this.y - this.height /2;
+    }
+
+    /**
+     * Return bottom of rectangular bounding box
+     * @return {number} edge of rectangular bounding box
+     */
+    get bottom() {
+      return this.y + this.height / 2;
+    }
   }
 
   return Player;
