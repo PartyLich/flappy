@@ -15,7 +15,7 @@ define(['Coord', 'ball', 'animation'], function (
      * @param {object}  opt  options object
      * @param {Mediator} opt.mediator  mediator to utilize
      */
-    constructor({x, y}, img, alpha, frameWidth, frameHeight, opt) {
+    constructor({x, y}, img, alpha, frameWidth, frameHeight, {mediator}) {
       const radius = Math.round(Math.max(frameWidth, frameHeight) / 2);
       super({
         x,
@@ -35,7 +35,7 @@ define(['Coord', 'ball', 'animation'], function (
       this.img = new Image();
 
       // Init the masked composite image.
-      opt.mediator.installTo(this);
+      mediator.installTo(this);
       this.publish('g:maskImg', this, alpha, img);
 
       // Animation list
