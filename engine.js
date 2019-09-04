@@ -44,30 +44,29 @@ function (require, Coord, Pipe, Player, StopWatch,
                           {customEscape: "Haml.html_escape"});
 
 
-    //Get canvas contexts.
+    // Get canvas contexts.
     ctxFront = cvsFront.getContext("2d");
     ctxFront.font = 'normal 12px sans-serif';
 
     ctxBg = cvsBg.getContext("2d");
 
 
-    //Initialize plane sprites
+    // Initialize plane sprites
     loadSprites();
 
-    //Initialize level list
+    // Initialize level list
     levels.push(
-      'json/lvl1.json'
-//      'json/lvl2.json',
-//      'json/lvl3.json',
-//      'json/lvl4.json',
-//      'json/lvl5.json',
-//      'json/lvl6.json',
-//      'json/lvl7.json'
+        'json/lvl1.json'
+        //      'json/lvl2.json',
+        //      'json/lvl3.json',
+        //      'json/lvl4.json',
+        //      'json/lvl5.json',
+        //      'json/lvl6.json',
+        //      'json/lvl7.json'
     );
 
-    //Install mediator
+    // Install mediator
     mediator.installTo(this);
-
 
 
     /**
@@ -86,25 +85,25 @@ function (require, Coord, Pipe, Player, StopWatch,
       stpFrame.reset();
       stpFrame.start();
 
-      //Reset scoring.
-      if(curLevel == 0) score = 0;
+      // Reset scoring.
+      if (curLevel == 0) score = 0;
       collisions = 0;
 
 
-      //Place background canvas where it needs to be.
+      // Place background canvas where it needs to be.
       $(cvsBg).css({
-          'left': $(cvsFront).position().left + 'px',
-          'top': $(cvsFront).position().top + 'px'
+        'left': $(cvsFront).position().left + 'px',
+        'top': $(cvsFront).position().top + 'px',
       });
 
-      //Register some event handlers!
-      $(cvsFront).mousedown(mDown)
-                 .mouseup(mUp4Path);
-
+      // Register some event handlers!
+      $(cvsFront)
+          .mousedown(mDown)
+          .mouseup(mUp4Path);
 /*******/
-      //Add Player
+      // Add Player
       var type = getRandomInt(1, imgSprites.length - 1);
-      user = new Player(new Coord({x:imgSprites[type].frameWidth/2+5, y:450}),
+      user = new Player(new Coord({x: imgSprites[type].frameWidth/2+5, y: 450}),
           imgSprites[type].img, imgSprites[type].alpha,
           imgSprites[type].frameWidth, imgSprites[type].frameHeight,
           {mediator: mediator}
@@ -117,12 +116,12 @@ function (require, Coord, Pipe, Player, StopWatch,
       console.log(user);
       objList.push(user);
 
-      //Add first pipe
+      // Add first pipe
       addPipe();
 
  /*****/
 
-      //Request first frame.
+      // Request first frame.
       console.log('about to gameTick');
       window.requestAnimationFrame(gameTick);
     }
@@ -142,59 +141,59 @@ function (require, Coord, Pipe, Player, StopWatch,
     function gameTick(time) {
       var index = 0,
           obj = null;
-      //Make sure we're loaded.
-      if(stillLoading()) {
+      // Make sure we're loaded.
+      if (stillLoading()) {
         return;
       }
 
-      //update timer
+      // update timer
       stpFrame.update();
 
-      //Clear displayed text
-      ctxFront.clearRect(0, 0, 250, 20);              //top left diag text
-      ctxFront.clearRect(0, cY - 35, 150, 20);          //score
+      // Clear displayed text
+      ctxFront.clearRect(0, 0, 250, 20); // top left diag text
+      ctxFront.clearRect(0, cY - 35, 150, 20); // score
 
-      //Process current event list item
-      if(eventList.length) {  eventProcess(); }
+      // Process current event list item
+      if (eventList.length) { eventProcess(); }
 
-      //Process object list
-      for(index = 0, obj; obj = objList[index]; index++) {
-        if(!obj) { continue; }
+      // Process object list
+      for (index = 0, obj; obj = objList[index]; index++) {
+        if (!obj) { continue; }
 
-        //Erase the foreground canvas.
+        // Erase the foreground canvas.
         mediator.publish('g:clearObject', obj, ctxFront);
 
-        //remove dead planes
-        if(obj.dead) {
+        // remove dead planes
+        if (obj.dead) {
           objList.splice(index, 1);
 
           continue;
         }
 
-        //Collision detection
-        if(collisionDetection(index, obj)) { continue; }
+        // Collision detection
+        if (collisionDetection(index, obj)) { continue; }
 
-        //New position and boundary looping
+        // New position and boundary looping
         mediator.publish('p:reposition', obj, cX, cY);
         ctxFront.fillStyle = '#FF0000';
       }
 
-      //Draw all objects.
-      for(index = 0, obj; obj = objList[index]; index++) {
+      // Draw all objects.
+      for (index = 0, obj; obj = objList[index]; index++) {
         mediator.publish('g:drawObject', obj, ctxFront);
       }
 
-      //Framerate
+      // Framerate
       frameCount++;
       ctxFront.fillText('Framerate: '+ Math.round(frameCount / (stpFrame.elapsedMilliseconds / 1000))
           +'    Time:'+(stpFrame.elapsedMilliseconds / 1000), 5, 10);
 
-      //Display current score.
+      // Display current score.
       ctxFront.fillText('Score: '+ score, 5, cY - 25);
 
-      //Request the next animation frame or end the game.
-//      if(objList.length === 0) {
-      if(user.dead) {
+      // Request the next animation frame or end the game.
+      //      if(objList.length === 0) {
+      if (user.dead) {
         endGame();
       } else {
         window.requestAnimationFrame(gameTick);
@@ -203,7 +202,7 @@ function (require, Coord, Pipe, Player, StopWatch,
 
     /*****************************************************************************/
     function stillLoading() {
-      if(loadQueue < 1) {
+      if (loadQueue < 1) {
         var txtWidth;
 
         ctxFront.save();
@@ -219,25 +218,25 @@ function (require, Coord, Pipe, Player, StopWatch,
     }
 
     function clearText() {
-      ctxFront.clearRect(0, 0, 250, 20);              //top left diag text
-      ctxFront.clearRect(0, cY - 35, 150, 20);          //score
+      ctxFront.clearRect(0, 0, 250, 20); // top left diag text
+      ctxFront.clearRect(0, cY - 35, 150, 20); // score
     }
 
     function endGame() {
       console.log('Ending game loop.');
-      //stop the game clock.
+      // stop the game clock.
       stpFrame.stop();
 
-      //Remove canvas event listeners
+      // Remove canvas event listeners
       $(cvsFront).off('mousedown', mDown)
-                 .off('mouseup', mUp4Path);
+          .off('mouseup', mUp4Path);
 
-      //Scoring update
+      // Scoring update
       hiScore = (score > hiScore) ? score : hiScore;
 
-      //broadcast level end message
+      // broadcast level end message
       mediator.publish('sys:levelEnd');
-      levelEnd();       //inter level transition screen
+      levelEnd(); // inter level transition screen
     }
 /*****************************************************************************/
 
@@ -248,48 +247,48 @@ function (require, Coord, Pipe, Player, StopWatch,
       var $btnStart = $('#btnStart'),
           $btnScore = $('#btnScore');
 
-      //clear objlist
+      // clear objlist
       objList.length = 0;
 
-      //Create nav buttons if they don't already exist.
-      if(!$btnStart.length) {
+      // Create nav buttons if they don't already exist.
+      if (!$btnStart.length) {
         $btnStart = $( tmplStartBtn({id: 'btnStart', text: 'START'}) );
         $('body').append($btnStart);
       }
-      if(!$btnScore.length) {
+      if (!$btnScore.length) {
         $btnScore = $( tmplStartBtn({id: 'btnScore', text: 'SCORE'}) );
         $('body').append($btnScore);
       }
 
-      //Show buttons
+      // Show buttons
       $btnStart.show();
       $btnScore.show();
 
-      //Hide the high score list.
-      if($('#scoreTable').length) $('#scoreTable').hide();
+      // Hide the high score list.
+      if ($('#scoreTable').length) $('#scoreTable').hide();
 
-      //Title
+      // Title
       cvsFront.width = cvsFront.width;
       cvsBg.width = cvsBg.width;
       ctxFront.font = 'bold 50px Courier';
       ctxFront.fillStyle = 'rgb(163, 188, 227)';
       ctxFront.fillText('Flappy Times Ahoy!', 250, 40);
 
-      //Display buttons
+      // Display buttons
       $btnStart.css({
-          'position' : 'absolute',
-          'top' : $(cvsFront).height() * .75 + 'px',
-          'left' : $(cvsFront).width() *.33 + 'px',
-          'z-index' : '3'
+        'position': 'absolute',
+        'top': $(cvsFront).height() * .75 + 'px',
+        'left': $(cvsFront).width() *.33 + 'px',
+        'z-index': '3',
       });
       $btnScore.css({
-          'position' : 'absolute',
-          'top' : $btnStart.css('top'),
-          'left' : $(cvsFront).width() *.33 + 100 + 'px',
-          'z-index' : '3'
+        'position': 'absolute',
+        'top': $btnStart.css('top'),
+        'left': $(cvsFront).width() *.33 + 100 + 'px',
+        'z-index': '3',
       });
 
-      //Add some event handlers
+      // Add some event handlers
       $btnStart.one('click', startClick);
       $btnScore.one('click', scoreClick);
     }
@@ -298,25 +297,25 @@ function (require, Coord, Pipe, Player, StopWatch,
     /** Loads the level specified by the [String] uri
      * @param {String} url
      */
-      function loadLevel(url) {
-        //Open synchronous GET request.
-        console.log('loadlevel url: ' + url);
-        syncGetJson(url, function (result) {
-            //Initialize background image.
-            bg.src = '';
-            bg.src = result.bg;
-            //Set the background image's load event to draw it on the canvas.
-            console.log('cX', cX);
-            $(bg).one('load', drawBg);
-        });
-      }
+    function loadLevel(url) {
+      // Open synchronous GET request.
+      console.log('loadlevel url: ' + url);
+      syncGetJson(url, function (result) {
+        // Initialize background image.
+        bg.src = '';
+        bg.src = result.bg;
+        // Set the background image's load event to draw it on the canvas.
+        console.log('cX', cX);
+        $(bg).one('load', drawBg);
+      });
+    }
 
 
     /** Callback function to draw an image to the background canvas on image
      *  load.
      */
     function drawBg() {
-//      console.log('g:drawBg', this, ctxBg, cX, cY);
+      //      console.log('g:drawBg', this, ctxBg, cX, cY);
       mediator.publish('g:drawBg', this, ctxBg, cX, cY);
     }
 
@@ -326,18 +325,19 @@ function (require, Coord, Pipe, Player, StopWatch,
      */
     function loadScores(url) {
       var table,
-          render = tmplScore({scores: [
-                                       { "name": "Last", "score": score },
-                                       { "name": "Best", "score": hiScore }
-                                     ]
-                                 });
+          render = tmplScore({
+            scores: [
+              { "name": "Last", "score": score },
+              { "name": "Best", "score": hiScore }
+            ]
+          });
 
       table = $('#scoreTable');
 
-      //Create the table if it doesnt exist.
-      if(!table.length) {
+      // Create the table if it doesnt exist.
+      if (!table.length) {
         table = $(render);
-        //Add table to doc
+        // Add table to doc
         $('body').append(table);
       } else {
         table.html(render);
@@ -348,12 +348,12 @@ function (require, Coord, Pipe, Player, StopWatch,
 //        }) );
       }
 
-      //TODO: just give it a canvas sized div and center the darn thing
+      // TODO: just give it a canvas sized div and center the darn thing
       table.css({
-        'position' : 'absolute',
-        'top' : $(cvsFront).height() * .35 + 'px',
-        'left' : $(cvsFront).width() *.25 + 'px',
-        'z-index' : '2'
+        'position': 'absolute',
+        'top': $(cvsFront).height() * .35 + 'px',
+        'left': $(cvsFront).width() *.25 + 'px',
+        'z-index': '2',
       });
 
       table.show();
@@ -363,12 +363,12 @@ function (require, Coord, Pipe, Player, StopWatch,
      * @param {String} url
      */
     function sendScore(url) {
-      //Get user info?
+      // Get user info?
 
-      //Send POST request to server.
-      $.post(url, {score : score, date : date}, function(data) {
-        //Display result dialog.
-        //alert('Server response: ' + data.response);
+      // Send POST request to server.
+      $.post(url, {score: score, date: date}, function (data) {
+        // Display result dialog.
+        // alert('Server response: ' + data.response);
         $('#dialog-modal').text(data.response);
         $('#dialog-modal').dialog('open');
       }, 'JSON');
@@ -380,29 +380,29 @@ function (require, Coord, Pipe, Player, StopWatch,
       var btnHome = $('#btnStart'),
           btnNext = $('#btnScore');
 
-      //Create nav buttons if they don't already exist.
-      if(btnHome == null) {
+      // Create nav buttons if they don't already exist.
+      if (btnHome == null) {
         btnHome = $('<button id="btnHome"></button>');
         $('body').append(btnHome);
       }
-      if(btnNext == null) {
+      if (btnNext == null) {
         btnNext = $('<button id="btnNext"></button>');
         $('body').append(btnNext);
       }
 
-      //Show buttons
+      // Show buttons
       btnHome.show();
       btnHome.text('HOME');
 
-//      btnNext.show();
-//      btnNext.text('NEXT LEVEL');
+      //      btnNext.show();
+      //      btnNext.text('NEXT LEVEL');
 
-      //Display buttons
+      // Display buttons
       btnHome.css({
-          'position' : 'absolute',
-          'top' : $(cvsFront).height() * .75 + 'px',
-          'left' : $(cvsFront).width() *.33 + 'px',
-          'z-index' : '3'
+        'position': 'absolute',
+        'top': $(cvsFront).height() * .75 + 'px',
+        'left': $(cvsFront).width() *.33 + 'px',
+        'z-index': '3',
       });
 //      btnNext.css({
 //          'position' : 'absolute',
@@ -412,9 +412,9 @@ function (require, Coord, Pipe, Player, StopWatch,
 //      });
       loadScores();
 
-      //New event handlers
+      // New event handlers
       btnHome.one('click', homeClick);
-//      btnNext.one('click', nextClick);
+      //      btnNext.one('click', nextClick);
     }
 
 
@@ -423,16 +423,16 @@ function (require, Coord, Pipe, Player, StopWatch,
 //      var click = new Coord({x : ev.offsetX, y : ev.offsetY});
 
       user.vy = -10;
-//      console.log('user.vy', user.vy);
+      //      console.log('user.vy', user.vy);
 
-      //Toggle click n drag flag.
+      // Toggle click n drag flag.
       drag = true;
     }
 
 
     /** Canvas 4 mouseUp event handler for path drawing. */
     function mUp4Path(ev) {
-      //Toggle click n drag flag.
+      // Toggle click n drag flag.
       drag = false;
     }
 
@@ -443,19 +443,19 @@ function (require, Coord, Pipe, Player, StopWatch,
       var btnStart = $('#btnStart'),
           btnScore = $('#btnScore');
 
-      //hide buttons.
+      // hide buttons.
       btnStart.hide();
       btnScore.hide();
 
-      //Load level
+      // Load level
       curLevel = 0;
       loadLevel(levels[curLevel]);
 
-      //Remove event handler so we don't end up with multiples.
-      //btnStart.off('click', startClick);
+      // Remove event handler so we don't end up with multiples.
+      // btnStart.off('click', startClick);
       btnScore.off('click', scoreClick);
 
-      //Start the game!
+      // Start the game!
       run();
     }
 
@@ -466,17 +466,17 @@ function (require, Coord, Pipe, Player, StopWatch,
       var btnHome = $('#btnStart'),
           btnScore = $('#btnScore');
 
-      //Adjust nav buttons
+      // Adjust nav buttons
       btnScore.hide();
       btnHome.text('HOME');
 
-      //Adjust event handlers.
-  //    btnScore.on.click.remove(scoreClickHandler);
-  //    btnScore.off('click', scoreClick);
+      // Adjust event handlers.
+      //    btnScore.on.click.remove(scoreClickHandler);
+      //    btnScore.off('click', scoreClick);
       btnHome.off('click', startClick);
       btnHome.one('click', homeClick);
 
-      //Show the score table
+      // Show the score table
       loadScores('json/scores.json');
     }
 
@@ -490,8 +490,8 @@ function (require, Coord, Pipe, Player, StopWatch,
       btnHome.text('START');
       btnNext.text('SCORES');
 
-      //Remove event handler so we don't end up with multiples.
-  //    btnHome.off('click', homeClick);
+      // Remove event handler so we don't end up with multiples.
+      //    btnHome.off('click', homeClick);
       btnNext.off('click', nextClick);
 
       //
@@ -504,25 +504,25 @@ function (require, Coord, Pipe, Player, StopWatch,
       var btnHome = $('#btnStart'),
           btnNext = $('#btnScore');
 
-      if(curLevel < levels.length-1) {    //More levels!
-        //Remove event handler(s).
-  //      btnNext.off('click', nextClick);
+      if (curLevel < levels.length-1) { // More levels!
+        // Remove event handler(s).
+        //      btnNext.off('click', nextClick);
         btnHome.off('click', homeClick);
 
-        //hide buttons.
+        // hide buttons.
         btnHome.hide();
         btnNext.hide();
 
-        //Load the next level
+        // Load the next level
         loadLevel(levels[++curLevel]);
 
-        //Start the game!
+        // Start the game!
         run();
-      } else {    //No mas.
-      //Load the next level
+      } else { // No mas.
+      // Load the next level
         loadLevel(levels[curLevel]);
 
-        //Start the game!
+        // Start the game!
         run();
       }
     }
@@ -535,34 +535,34 @@ function (require, Coord, Pipe, Player, StopWatch,
      */
     function addPipe(type, pos, heading) {
       var open = getRandomInt(60, cY - 60);
-      if(type == null) {
+      if (type == null) {
         type = 0;
       }
 
       pos || (pos = new Coord({x: cX, y: open}));
 
-      if(heading == null) {
+      if (heading == null) {
         heading = 2 * Math.PI;
       }
 
       try {
-//        console.log(mediator);
+        //        console.log(mediator);
         var pipe = new Pipe(pos, imgSprites[type].img, imgSprites[type].alpha,
             imgSprites[type].frameWidth, imgSprites[type].frameHeight,
             {mediator: mediator});
 
         console.log(pipe.animations.def);
-      } catch(e) {
+      } catch (e) {
         console.log(imgSprites);
         console.log(e);
         console.log(e.stack);
         return;
       }
 
-      //Alter plane heading/velocity/etc.
+      // Alter plane heading/velocity/etc.
       pipe.setScale(1);
 
-      //Add to object list.
+      // Add to object list.
       objList.push(pipe);
     }
 
@@ -570,17 +570,17 @@ function (require, Coord, Pipe, Player, StopWatch,
     /** Initialize sprites
      */
     function loadSprites() {
-      //Open synchronous GET request.
+      // Open synchronous GET request.
       syncGetJson('json/sprites.json', function (result) {
-        //Initialize plane list.
-        for(var index = 0, sprite; sprite = result.sprites[index]; index++) {
+        // Initialize plane list.
+        for (var index = 0, sprite; sprite = result.sprites[index]; index++) {
           console.log('Adding sprite', sprite);
 
           imgSprites.push({
-            img : loadImage(sprite.img),
-            alpha : loadImage(sprite.alpha),
-            frameWidth : sprite.frameWidth,
-            frameHeight : sprite.frameHeight
+            img: loadImage(sprite.img),
+            alpha: loadImage(sprite.alpha),
+            frameWidth: sprite.frameWidth,
+            frameHeight: sprite.frameHeight
           });
         }
       });
@@ -590,20 +590,20 @@ function (require, Coord, Pipe, Player, StopWatch,
     /** Collision detection
      * @param {Number} index  Objectlist index.
      * @param {Plane} obj   Plane referenced by index.
-     * @returns {Boolean} True if collision detected.
+     * @return {Boolean} True if collision detected.
      */
     function collisionDetection(index, obj) {
-      if(obj instanceof Pipe) {
-//        console.log("obj is a Pipe!");
-        if(obj.x + obj.width/2 <= 5) {  //Pipe is off screen.
-          //Increment score.
+      if (obj instanceof Pipe) {
+        // console.log("obj is a Pipe!");
+        if (obj.x + obj.width/2 <= 5) { // Pipe is off screen.
+          // Increment score.
           mediator.publish('score:pipe');
           score++;
 
-          //kill pipe
+          // kill pipe
           obj.die();
 
-          //add new pipe
+          // add new pipe
           addPipe();
 
           return true;
@@ -615,22 +615,22 @@ function (require, Coord, Pipe, Player, StopWatch,
       var userHalf = user.width/2;
           userHalfY = user.height/2;
 
-      if(user.y + userHalf >= cY) {
-        //Hit the floor.
+      if (user.y + userHalf >= cY) {
+        // Hit the floor.
         user.die();
       }
 
-      for(var i = index+1; i < objList.length; i++) {
-        if((objList[i].x - objList[i].width/2) > (user.x + userHalf)) {
-          //player hasnt reached any pipes
+      for (var i = index+1; i < objList.length; i++) {
+        if ((objList[i].x - objList[i].width/2) > (user.x + userHalf)) {
+          // player hasnt reached any pipes
           break;
         }
 
-        if(user.y + userHalfY > objList[i].y + objList[i].gap ||
+        if (user.y + userHalfY > objList[i].y + objList[i].gap ||
            user.y - userHalfY < objList[i].y - objList[i].gap) {
-          //Collision! oh noes!
+          // Collision! oh noes!
 
-          //Start crash sequences
+          // Start crash sequences
           obj.die();
           objList[i].die();
 
@@ -644,7 +644,7 @@ function (require, Coord, Pipe, Player, StopWatch,
 
     /**
      * @param {String}
-     * @returns {Image}
+     * @return {Image}
      */
     function loadImage(src) {
       var imgTmp = new Image();
@@ -666,9 +666,9 @@ function (require, Coord, Pipe, Player, StopWatch,
 
     function syncGetJson(url, callback) {
       $.ajax(url, {
-        async : false,
-        dataType : 'json',
-        success : callback
+        async: false,
+        dataType: 'json',
+        success: callback,
       });
     }
 
@@ -678,9 +678,8 @@ function (require, Coord, Pipe, Player, StopWatch,
     }
 
 
-
     return {
-      home : home
+      home: home,
     };
   }
 
