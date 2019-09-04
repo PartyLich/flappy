@@ -3,8 +3,7 @@ define(['require', 'Coord', 'pipe', 'player', 'StopWatch',
   'text!tmpl/table.jshaml', 'text!tmpl/startButton.jshaml', 'text!tmpl/score.jshaml'],
 function (require, Coord, Pipe, Player, StopWatch,
     Mediator, Graphics, Physics) {
-  var getRandom = require('mathLib').getRandom,
-      getRandomInt = require('mathLib').getRandomInt;
+  const {getRandomInt} = require('mathLib');
 
   /**
    *
