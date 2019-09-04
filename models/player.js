@@ -1,4 +1,4 @@
-define(['coord','ball', 'path', 'animation'], function(Coord, Ball, Path, Animation){
+define(['Coord','ball', 'path', 'animation'], function(Coord, Ball, Path, Animation){
 
   /** Player object.
    * @param {Coord} pos    Starting location

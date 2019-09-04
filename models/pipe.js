@@ -1,4 +1,4 @@
-define(['coord','ball', 'path', 'animation'], function(Coord, Ball, Path, Animation){
+define(['Coord','ball', 'path', 'animation'], function(Coord, Ball, Path, Animation){
 
   /** Plane object.
    * @param {Coord} pos    Starting location

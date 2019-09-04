@@ -1,4 +1,4 @@
-define(['coord'], function(Coord){
+define(['Coord'], function(Coord){
 
   //class Ball extends Coord {
   function Ball(x, y, r) {

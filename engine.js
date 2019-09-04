@@ -1,6 +1,6 @@
-define(['require','coord','ball', 'hue', 'path', 'pipe', 'action', 'player', 'StopWatch',
-        'Mediator', 'Graphics', 'Physics', 'mathLib',
-        'text!tmpl/table.jshaml', 'text!tmpl/startButton.jshaml', 'text!tmpl/score.jshaml'],
+define(['require', 'Coord', 'ball', 'hue', 'path', 'pipe', 'action', 'player', 'StopWatch',
+  'Mediator', 'Graphics', 'Physics', 'mathLib',
+  'text!tmpl/table.jshaml', 'text!tmpl/startButton.jshaml', 'text!tmpl/score.jshaml'],
 function (require, Coord, Ball, Hue, Path, Pipe, Action, Player, StopWatch, Mediator, Graphics, Physics) {
   var getRandom = require('mathLib').getRandom,
       getRandomInt = require('mathLib').getRandomInt;

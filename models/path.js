@@ -1,4 +1,4 @@
-define(['coord', 'hue'], function(Coord, Hue){
+define(['Coord', 'hue'], function(Coord, Hue){
 
   /**
    * Path class. A spiffy {Coord} list with drawing functions and such.
