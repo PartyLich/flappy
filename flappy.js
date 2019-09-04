@@ -2,8 +2,8 @@
  *
  */
 require.config({
-  paths: {  //Configure library/module paths.
-    /*'jquery' : 'https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min',*/
+  paths: {  // Configure library/module paths.
+    // 'jquery' : 'https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min',
     'jquery' : 'lib/jquery-1.8.2.min',
     'haml': 'lib/haml',
 
@@ -12,16 +12,13 @@ require.config({
     'Graphics': 'lib/Graphics',
     'Physics': 'lib/physics',
 
-    'action': 'models/action',
     'animation': 'models/Animation',
     'ball': 'models/Ball',
     'Coord': 'models/Coord',
-    'hue': 'models/hue',
-    'path': 'models/path',
-//    'plane': 'models/plane',
+
     'player': 'models/Player',
     'pipe': 'models/Pipe',
-    'StopWatch': 'models/StopWatch'
+    'StopWatch': 'models/StopWatch',
   },
   //Shim config FTW: http://requirejs.org/docs/api.html#config-shim
   shim: {
