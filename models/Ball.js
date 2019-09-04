@@ -1,5 +1,16 @@
 define(['Coord'], function (Coord) {
+  /**
+   * Ball class. A point in 2space with radius.
+   * @extends Coord
+   */
   class Ball extends Coord {
+    /**
+     * Ball class constructor
+     * @param {object} [opt={}]
+     * @param {Number} opt.[x=0] x location
+     * @param {Number} opt.[y=0] y location
+     * @param {number} opt.[r=0] radius
+     */
     constructor({x = 0, y = 0, r = 0} = {}) {
       super({x: x, y: y});
 
