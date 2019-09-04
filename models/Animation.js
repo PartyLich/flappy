@@ -10,7 +10,7 @@ define(function () {
      * @param {Number} opt.[firstFrame=0] first frame index
      * @param {Number} opt.[length=0]     number of frames
      * @param {Number} opt.[repeat=0]
-     * @param {[type]} opt.[fps=60] framerate
+     * @param {number} opt.[fps=60] framerate
      */
     constructor({
       firstFrame = 0,
