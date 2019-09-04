@@ -14,7 +14,7 @@ require.config({
 
     'action': 'models/action',
     'animation': 'models/animation',
-    'ball': 'models/ball',
+    'ball': 'models/Ball',
     'Coord': 'models/Coord',
     'hue': 'models/hue',
     'path': 'models/path',
