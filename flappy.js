@@ -20,16 +20,18 @@ require.config({
     'pipe': 'models/Pipe',
     'StopWatch': 'models/StopWatch',
   },
-  //Shim config FTW: http://requirejs.org/docs/api.html#config-shim
+  // Shim config FTW: http://requirejs.org/docs/api.html#config-shim
   shim: {
-    'haml': { exports: 'Haml' }
-  }
+    'haml': {
+      exports: 'Haml',
+    },
+  },
 });
 
 
-require(['jquery', 'haml', 'engine'], function($, Haml, Engine) {
-  $(function() {
-    //RequestAnimationFrame shim
+require(['jquery', 'haml', 'engine'], function ($, Haml, Engine) {
+  $(function () {
+    // RequestAnimationFrame shim
     var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
         window.webkitRequestAnimationFrame || window.msRequestAnimationFrame,
         //
