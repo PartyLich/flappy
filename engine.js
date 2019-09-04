@@ -6,7 +6,8 @@ function (require, Coord, Pipe, Player, StopWatch,
   const {getRandomInt} = require('mathLib');
 
   /**
-   *
+   * Main game engine
+   * @return {object}
    */
   function Engine() {
     let frameCount = 0;
@@ -173,6 +174,10 @@ function (require, Coord, Pipe, Player, StopWatch,
       }
     }
 
+    /**
+     * Check if resources are still being loaded
+     * @return {boolean} true is resources are still loading, false otherwise
+     */
     function stillLoading() {
       if (loadQueue < 1) {
         const loadingText = 'LOADING...';
@@ -372,7 +377,9 @@ function (require, Coord, Pipe, Player, StopWatch,
     }
 
 
-    /** Start button event */
+    /** Start button event
+     * @param {Event} ev
+     */
     function startClick(ev) {
       console.log('startClick');
       const btnStart = $('#btnStart');
@@ -560,8 +567,6 @@ function (require, Coord, Pipe, Player, StopWatch,
 
         if (user.y + userHalfY > objList[i].y + objList[i].gap ||
            user.y - userHalfY < objList[i].y - objList[i].gap) {
-          // Collision! oh noes!
-
           // Start crash sequences
           obj.die();
           objList[i].die();
@@ -575,7 +580,7 @@ function (require, Coord, Pipe, Player, StopWatch,
 
 
     /**
-     * @param {String}
+     * @param {String} src
      * @return {Image}
      */
     function loadImage(src) {
@@ -590,13 +595,19 @@ function (require, Coord, Pipe, Player, StopWatch,
     }
 
 
-    /** Increments the resource loaded counter so we know everything is ready. */
+    /** Increments the resource loaded counter so we know everything is ready.
+     */
     function resourceLoad() {
       loadQueue++;
       console.log('Resource loaded:', this, 'complete: ', this.complete);
     }
 
 
+    /**
+     * Synchronous GET request expecting JSON
+     * @param  {string}   url      [description]
+     * @param  {Function} callback [description]
+     */
     function syncGetJson(url, callback) {
       $.ajax(url, {
         async: false,
