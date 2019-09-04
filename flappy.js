@@ -19,7 +19,7 @@ require.config({
     'hue': 'models/hue',
     'path': 'models/path',
 //    'plane': 'models/plane',
-    'player': 'models/player',
+    'player': 'models/Player',
     'pipe': 'models/Pipe',
     'StopWatch': 'models/StopWatch'
   },
