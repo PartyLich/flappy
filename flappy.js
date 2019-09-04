@@ -13,7 +13,7 @@ require.config({
     'Physics': 'lib/physics',
 
     'action': 'models/action',
-    'animation': 'models/animation',
+    'animation': 'models/Animation',
     'ball': 'models/Ball',
     'Coord': 'models/Coord',
     'hue': 'models/hue',
