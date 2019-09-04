@@ -53,12 +53,6 @@ function (require, Coord, Pipe, Player, StopWatch,
     // Initialize level list
     levels.push(
         'json/lvl1.json'
-        //      'json/lvl2.json',
-        //      'json/lvl3.json',
-        //      'json/lvl4.json',
-        //      'json/lvl5.json',
-        //      'json/lvl6.json',
-        //      'json/lvl7.json'
     );
 
     // Install mediator
@@ -94,9 +88,8 @@ function (require, Coord, Pipe, Player, StopWatch,
 
       // Register some event handlers!
       $(cvsFront)
-          .mousedown(mDown)
-          .mouseup(mUp4Path);
-/*******/
+          .mousedown(mDown);
+
       // Add Player
       const type = getRandomInt(1, imgSprites.length - 1);
       user = new Player(new Coord({x: imgSprites[type].frameWidth/2+5, y: 450}),
@@ -104,30 +97,15 @@ function (require, Coord, Pipe, Player, StopWatch,
           imgSprites[type].frameWidth, imgSprites[type].frameHeight,
           {mediator: mediator}
       );
-//      user = new Player(new Coord({x:30, y:450}),
-//          imgSprites[1].img, imgSprites[1].alpha,
-//          imgSprites[1].frameWidth, imgSprites[1].frameHeight,
-//          {mediator: mediator}
-//      );
       console.log(user);
       objList.push(user);
 
       // Add first pipe
       addPipe();
 
- /*****/
-
       // Request first frame.
       console.log('about to gameTick');
       window.requestAnimationFrame(gameTick);
-    }
-
-
-    /**
-     *
-     */
-    function write(message) {
-      $('#status')[0].innerHTML += message + '<br />';
     }
 
 
@@ -188,7 +166,6 @@ function (require, Coord, Pipe, Player, StopWatch,
       ctxFront.fillText('Score: '+ score, 5, cY - 25);
 
       // Request the next animation frame or end the game.
-      //      if(objList.length === 0) {
       if (user.dead) {
         endGame();
       } else {
@@ -196,7 +173,6 @@ function (require, Coord, Pipe, Player, StopWatch,
       }
     }
 
-    /*****************************************************************************/
     function stillLoading() {
       if (loadQueue < 1) {
         const loadingText = 'LOADING...';
@@ -212,11 +188,6 @@ function (require, Coord, Pipe, Player, StopWatch,
       return false;
     }
 
-    function clearText() {
-      ctxFront.clearRect(0, 0, 250, 20); // top left diag text
-      ctxFront.clearRect(0, cY - 35, 150, 20); // score
-    }
-
     function endGame() {
       console.log('Ending game loop.');
       // stop the game clock.
@@ -224,7 +195,7 @@ function (require, Coord, Pipe, Player, StopWatch,
 
       // Remove canvas event listeners
       $(cvsFront).off('mousedown', mDown)
-          .off('mouseup', mUp4Path);
+          .off('mouseup');
 
       // Scoring update
       hiScore = (score > hiScore) ? score : hiScore;
@@ -233,7 +204,6 @@ function (require, Coord, Pipe, Player, StopWatch,
       mediator.publish('sys:levelEnd');
       levelEnd(); // inter level transition screen
     }
-/*****************************************************************************/
 
 
     /** Display the home splash screen and such.
@@ -310,7 +280,6 @@ function (require, Coord, Pipe, Player, StopWatch,
      *  load.
      */
     function drawBg() {
-      //      console.log('g:drawBg', this, ctxBg, cX, cY);
       mediator.publish('g:drawBg', this, ctxBg, cX, cY);
     }
 
@@ -336,11 +305,6 @@ function (require, Coord, Pipe, Player, StopWatch,
         $('body').append(table);
       } else {
         table.html(render);
-//        table.html( tmplScore({scores: [
-//                                        { "name": "Last", "score": score },
-//                                        { "name": "Best", "score": hiScore }
-//                                        ]
-//        }) );
       }
 
       // TODO: just give it a canvas sized div and center the darn thing
@@ -363,7 +327,6 @@ function (require, Coord, Pipe, Player, StopWatch,
       // Send POST request to server.
       $.post(url, {score: score, date: date}, function (data) {
         // Display result dialog.
-        // alert('Server response: ' + data.response);
         $('#dialog-modal').text(data.response);
         $('#dialog-modal').dialog('open');
       }, 'JSON');
@@ -389,9 +352,6 @@ function (require, Coord, Pipe, Player, StopWatch,
       btnHome.show();
       btnHome.text('HOME');
 
-      //      btnNext.show();
-      //      btnNext.text('NEXT LEVEL');
-
       // Display buttons
       btnHome.css({
         'position': 'absolute',
@@ -399,36 +359,16 @@ function (require, Coord, Pipe, Player, StopWatch,
         'left': $(cvsFront).width() *.33 + 'px',
         'z-index': '3',
       });
-//      btnNext.css({
-//          'position' : 'absolute',
-//          'top' : btnHome.css('top'),
-//          'left' : $(cvsFront).width() * .33 + 100 + 'px',
-//          'z-index' : '3'
-//      });
       loadScores();
 
       // New event handlers
       btnHome.one('click', homeClick);
-      //      btnNext.one('click', nextClick);
     }
 
 
     /** Canvas4 mouseDown event handler. Gives user vertical velocity */
     function mDown(ev) {
-//      var click = new Coord({x : ev.offsetX, y : ev.offsetY});
-
       user.vy = -10;
-      //      console.log('user.vy', user.vy);
-
-      // Toggle click n drag flag.
-      drag = true;
-    }
-
-
-    /** Canvas 4 mouseUp event handler for path drawing. */
-    function mUp4Path(ev) {
-      // Toggle click n drag flag.
-      drag = false;
     }
 
 
@@ -447,7 +387,6 @@ function (require, Coord, Pipe, Player, StopWatch,
       loadLevel(levels[curLevel]);
 
       // Remove event handler so we don't end up with multiples.
-      // btnStart.off('click', startClick);
       btnScore.off('click', scoreClick);
 
       // Start the game!
@@ -466,8 +405,6 @@ function (require, Coord, Pipe, Player, StopWatch,
       btnHome.text('HOME');
 
       // Adjust event handlers.
-      //    btnScore.on.click.remove(scoreClickHandler);
-      //    btnScore.off('click', scoreClick);
       btnHome.off('click', startClick);
       btnHome.one('click', homeClick);
 
@@ -486,7 +423,6 @@ function (require, Coord, Pipe, Player, StopWatch,
       btnNext.text('SCORES');
 
       // Remove event handler so we don't end up with multiples.
-      //    btnHome.off('click', homeClick);
       btnNext.off('click', nextClick);
 
       //
@@ -501,7 +437,6 @@ function (require, Coord, Pipe, Player, StopWatch,
 
       if (curLevel < levels.length-1) { // More levels!
         // Remove event handler(s).
-        //      btnNext.off('click', nextClick);
         btnHome.off('click', homeClick);
 
         // hide buttons.
@@ -543,7 +478,6 @@ function (require, Coord, Pipe, Player, StopWatch,
       let pipe;
 
       try {
-        //        console.log(mediator);
         pipe = new Pipe(pos, imgSprites[type].img, imgSprites[type].alpha,
             imgSprites[type].frameWidth, imgSprites[type].frameHeight,
             {mediator: mediator});
@@ -668,11 +602,6 @@ function (require, Coord, Pipe, Player, StopWatch,
         dataType: 'json',
         success: callback,
       });
-    }
-
-
-    function aSyncGetJson(url, callback) {
-
     }
 
 
