@@ -134,7 +134,7 @@ define(['Coord', 'ball', 'animation'], function (
           this.width * this.scale,
           32
       );
-      for (var y = this.gap + 32; y < 900; y += this.height - 32) {
+      for (let y = this.gap + 32; y < 900; y += this.height - 32) {
         ctx.drawImage(
             this.img,
             this.frameX,
@@ -160,7 +160,7 @@ define(['Coord', 'ball', 'animation'], function (
           this.width * this.scale,
           32
       );
-      for (var y = this.gap + 32; y < +900; y += this.height - 32) {
+      for (let y = this.gap + 32; y < +900; y += this.height - 32) {
         ctx.drawImage(
             this.img,
             this.frameX,
