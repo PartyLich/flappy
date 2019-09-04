@@ -583,6 +583,7 @@ function (require, Coord, Pipe, Player, StopWatch,
 
       loadQueue--;
       $(imgTmp).one('load', resourceLoad);
+      imgTmp.crossOrigin = 'Anonymous';
       imgTmp.src = src;
 
       return imgTmp;
