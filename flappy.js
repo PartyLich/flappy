@@ -9,7 +9,7 @@ require.config({
 
     'mathLib': 'lib/mathLib',
     'Mediator': 'lib/mediator',
-    'Graphics': 'lib/graphics',
+    'Graphics': 'lib/Graphics',
     'Physics': 'lib/physics',
 
     'action': 'models/action',
