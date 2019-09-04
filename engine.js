@@ -511,7 +511,7 @@ function (require, Coord, Pipe, Player, StopWatch,
       // Open synchronous GET request.
       syncGetJson('json/sprites.json', function (result) {
         // Initialize plane list.
-        for (let index = 0, sprite; sprite = result.sprites[index]; index++) {
+        for (const sprite of result.sprites) {
           console.log('Adding sprite', sprite);
           const imgSprite = {
             img: loadImage(sprite.img),
