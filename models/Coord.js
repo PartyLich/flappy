@@ -64,7 +64,9 @@ define(function () {
      * @param {Coord}
      */
     midpoint(b) {
-      return new Coord({x: (this.x + b.x) / 2, y: (this.y + b.y) / 2});
+      const x = (this.x + b.x) / 2;
+      const y = (this.y + b.y) / 2;
+      return new Coord({x, y});
     }
   }
 
