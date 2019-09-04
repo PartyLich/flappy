@@ -154,7 +154,7 @@ function (require, Coord, Pipe, Player, StopWatch,
       }
 
       // Draw all objects.
-      for (index = 0, obj; obj = objList[index]; index++) {
+      for (const obj of objList) {
         mediator.publish('g:drawObject', obj, ctxFront);
       }
 
