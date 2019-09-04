@@ -544,6 +544,7 @@ function (require, Coord, Pipe, Player, StopWatch,
     /**
      * [handlePipeCollision description]
      * @param {object} obj
+     * @return {boolean}
      */
     function handlePipeCollision(obj) {
       if (obj.x + obj.width/2 <= 5) { // Pipe is off screen.

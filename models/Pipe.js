@@ -3,8 +3,12 @@ define(['Coord', 'ball', 'animation'], function (
     Ball,
     Animation,
 ) {
+  /**
+   * Pipe object
+   * @extends Ball
+   */
   class Pipe extends Ball {
-    /** Pipe object.
+    /** Pipe constructor
      * @param {Coord}  pos    Starting location
      * @param {number}  pos.x  starting x value
      * @param {number}  pos.y  starting y value

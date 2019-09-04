@@ -3,18 +3,22 @@ define(['Coord', 'ball', 'animation'], function (
     Ball,
     Animation
 ) {
+  /**
+   * Player object
+   * @extends Ball
+   */
   class Player extends Ball {
-    /** Player object.
+    /** Player constructor
      * @param {Coord} pos    Starting location
      * @param {Image} img    Sprite
      * @param {Image} alpha  Mask
-     * @param frameWidth     width of each animation frame
-     * @param frameHeight    height of each animation frame
+     * @param {number} frameWidth     width of each animation frame
+     * @param {number} frameHeight    height of each animation frame
+     * @param {object}  opt  options
+     * @param {Mediator} opt.mediator
      */
-    // function Player(pos, img, alpha, frameWidth, frameHeight, opt) {
     constructor({x, y}, img, alpha, frameWidth, frameHeight, {mediator}) {
       // Super class constructor
-      // Ball.call(this, pos.x, pos.y, Math.round(Math.max(frameWidth, frameHeight) / 2));
       const radius = Math.round(Math.max(frameWidth, frameHeight) / 2);
       super({
         x,
@@ -77,7 +81,6 @@ define(['Coord', 'ball', 'animation'], function (
      *  @return {Number} Heading in radians.
      */
     getHeading() {
-      // console.log('Heading atan2('+ this.vy +'/'+ this.vx +'): ' + Math.atan2(this.vy, this.vx) +');
       return Math.atan2(this.vy, this.vx);
     }
 
@@ -100,7 +103,6 @@ define(['Coord', 'ball', 'animation'], function (
       // Find new x and y velocity components
       this.vx = v * Math.cos(angle);
       this.vy = v * Math.sin(angle);
-      //    console.log('Set heading v:'+ v +' angle:'+ angle +' vx:'+ this.vx +' vy:'+ this.vy);
     }
 
     /** Set the drawing scale of this player on interval [0,1].
