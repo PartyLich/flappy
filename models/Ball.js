@@ -1,4 +1,4 @@
-define(['Coord'], function(Coord){
+define(['Coord'], function (Coord) {
   class Ball extends Coord {
     constructor({x = 0, y = 0, r = 0} = {}) {
       super({x: x, y: y});
