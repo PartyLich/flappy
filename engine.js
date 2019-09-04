@@ -9,45 +9,42 @@ function (require, Coord, Pipe, Player, StopWatch,
    *
    */
   function Engine() {
-    var ctxFront, ctxBg,
-        frameCount = 0, score = 0, collisions = 0,
-        selected = null, curLevel = 0,
-        loadQueue = 1,
-        drag = false,
-  //  Stopwatch stpFrame
-        stpFrame = new StopWatch(),
-        bg = new Image(),
-  //  CanvasElement cvs4, cvsBg;
-        cvsFront = $('#cvsFront')[0], cvsBg = $('#cvsBg')[0],
-        cX = cvsFront.width,
-        cY = cvsFront.height,
-        objList = [], levels = [],
-    //  imgSprites = new List<ImageElement>()
-        imgSprites = [],
-    //  eventList = new List<Action>()
-        eventList = [],
+    let frameCount = 0;
+    let score = 0;
+    let curLevel = 0;
+    let loadQueue = 1;
+    const stpFrame = new StopWatch();
+    const bg = new Image();
+    const cvsFront = $('#cvsFront')[0];
+    const cvsBg = $('#cvsBg')[0];
+    let cX = cvsFront.width;
+    let cY = cvsFront.height;
+    const objList = [];
+    const levels = [];
+    const imgSprites = [];
+    const eventList = [];
 
-        mediator = new Mediator(),
-        graphics = new Graphics(mediator),
-        physics = new Physics(mediator),
+    const mediator = new Mediator();
+    const graphics = new Graphics(mediator);
+    const physics = new Physics(mediator);
 
-        user = null,
-        hiScore = 0,
+    let user = null;
+    let hiScore = 0;
 
-    //templates
-        tmplTable = Haml( require('text!tmpl/table.jshaml'),
-                      {customEscape: "Haml.html_escape"}),
-        tmplStartBtn = Haml( require('text!tmpl/startButton.jshaml'),
-                         {customEscape: "Haml.html_escape"}),
-        tmplScore = Haml( require('text!tmpl/score.jshaml'),
-                          {customEscape: "Haml.html_escape"});
+    // templates
+    const tmplTable = Haml( require('text!tmpl/table.jshaml'),
+        {customEscape: 'Haml.html_escape'});
+    const tmplStartBtn = Haml( require('text!tmpl/startButton.jshaml'),
+        {customEscape: 'Haml.html_escape'});
+    const tmplScore = Haml( require('text!tmpl/score.jshaml'),
+        {customEscape: 'Haml.html_escape'});
 
 
     // Get canvas contexts.
-    ctxFront = cvsFront.getContext("2d");
+    const ctxFront = cvsFront.getContext('2d');
     ctxFront.font = 'normal 12px sans-serif';
 
-    ctxBg = cvsBg.getContext("2d");
+    const ctxBg = cvsBg.getContext('2d');
 
 
     // Initialize plane sprites
@@ -101,7 +98,7 @@ function (require, Coord, Pipe, Player, StopWatch,
           .mouseup(mUp4Path);
 /*******/
       // Add Player
-      var type = getRandomInt(1, imgSprites.length - 1);
+      const type = getRandomInt(1, imgSprites.length - 1);
       user = new Player(new Coord({x: imgSprites[type].frameWidth/2+5, y: 450}),
           imgSprites[type].img, imgSprites[type].alpha,
           imgSprites[type].frameWidth, imgSprites[type].frameHeight,
@@ -138,8 +135,8 @@ function (require, Coord, Pipe, Player, StopWatch,
      * @param {Number} time  When this animation frame is scheduled to run.
      */
     function gameTick(time) {
-      var index = 0,
-          obj = null;
+      let index = 0;
+      let obj = null;
       // Make sure we're loaded.
       if (stillLoading()) {
         return;
@@ -202,12 +199,11 @@ function (require, Coord, Pipe, Player, StopWatch,
     /*****************************************************************************/
     function stillLoading() {
       if (loadQueue < 1) {
-        var txtWidth;
-
+        const loadingText = 'LOADING...';
+        const txtWidth = ctxFront.measureText(loadingText).width;
         ctxFront.save();
         ctxFront.font = 'bold 30px sans-serif';
-        txtWidth = ctxFront.measureText('LOADING...').width;
-        ctxFront.fillText('LOADING...', cX / 2 - txtWidth / 2, cY / 2);
+        ctxFront.fillText(loadingText, cX / 2 - txtWidth / 2, cY / 2);
         ctxFront.restore();
         console.log('loadQueue', loadQueue);
         return true;
@@ -243,8 +239,8 @@ function (require, Coord, Pipe, Player, StopWatch,
     /** Display the home splash screen and such.
      */
     function home() {
-      var $btnStart = $('#btnStart'),
-          $btnScore = $('#btnScore');
+      let $btnStart = $('#btnStart');
+      let $btnScore = $('#btnScore');
 
       // clear objlist
       objList.length = 0;
@@ -323,13 +319,13 @@ function (require, Coord, Pipe, Player, StopWatch,
      * @param {String} url
      */
     function loadScores(url) {
-      var table,
-          render = tmplScore({
-            scores: [
-              { "name": "Last", "score": score },
-              { "name": "Best", "score": hiScore }
-            ]
-          });
+      let table;
+      const render = tmplScore({
+        scores: [
+          { "name": "Last", "score": score },
+          { "name": "Best", "score": hiScore }
+        ]
+      });
 
       table = $('#scoreTable');
 
@@ -376,8 +372,8 @@ function (require, Coord, Pipe, Player, StopWatch,
 
     /** Inter-level transition screen. Re-uses home screen nav buttons */
     function levelEnd() {
-      var btnHome = $('#btnStart'),
-          btnNext = $('#btnScore');
+      let btnHome = $('#btnStart');
+      let btnNext = $('#btnScore');
 
       // Create nav buttons if they don't already exist.
       if (btnHome == null) {
@@ -439,8 +435,8 @@ function (require, Coord, Pipe, Player, StopWatch,
     /** Start button event */
     function startClick(ev) {
       console.log('startClick');
-      var btnStart = $('#btnStart'),
-          btnScore = $('#btnScore');
+      const btnStart = $('#btnStart');
+      const btnScore = $('#btnScore');
 
       // hide buttons.
       btnStart.hide();
@@ -462,8 +458,8 @@ function (require, Coord, Pipe, Player, StopWatch,
     /** Score button event */
     function scoreClick(ev) {
       console.log('scoreClick');
-      var btnHome = $('#btnStart'),
-          btnScore = $('#btnScore');
+      const btnHome = $('#btnStart');
+      const btnScore = $('#btnScore');
 
       // Adjust nav buttons
       btnScore.hide();
@@ -483,8 +479,8 @@ function (require, Coord, Pipe, Player, StopWatch,
     /** Home button event */
     function homeClick(ev) {
       console.log('homeClick');
-      var btnHome = $('#btnStart'),
-          btnNext = $('#btnScore');
+      const btnHome = $('#btnStart');
+      const btnNext = $('#btnScore');
 
       btnHome.text('START');
       btnNext.text('SCORES');
@@ -500,8 +496,8 @@ function (require, Coord, Pipe, Player, StopWatch,
     /** Next level button event */
     function nextClick(ev) {
       console.log('nextClick');
-      var btnHome = $('#btnStart'),
-          btnNext = $('#btnScore');
+      const btnHome = $('#btnStart');
+      const btnNext = $('#btnScore');
 
       if (curLevel < levels.length-1) { // More levels!
         // Remove event handler(s).
@@ -533,7 +529,7 @@ function (require, Coord, Pipe, Player, StopWatch,
      * @param {Number} heading
      */
     function addPipe(type, pos, heading) {
-      var open = getRandomInt(60, cY - 60);
+      const open = getRandomInt(60, cY - 60);
       if (type == null) {
         type = 0;
       }
@@ -544,9 +540,11 @@ function (require, Coord, Pipe, Player, StopWatch,
         heading = 2 * Math.PI;
       }
 
+      let pipe;
+
       try {
         //        console.log(mediator);
-        var pipe = new Pipe(pos, imgSprites[type].img, imgSprites[type].alpha,
+        pipe = new Pipe(pos, imgSprites[type].img, imgSprites[type].alpha,
             imgSprites[type].frameWidth, imgSprites[type].frameHeight,
             {mediator: mediator});
 
@@ -574,13 +572,14 @@ function (require, Coord, Pipe, Player, StopWatch,
         // Initialize plane list.
         for (var index = 0, sprite; sprite = result.sprites[index]; index++) {
           console.log('Adding sprite', sprite);
-
-          imgSprites.push({
+          const imgSprite = {
             img: loadImage(sprite.img),
             alpha: loadImage(sprite.alpha),
             frameWidth: sprite.frameWidth,
-            frameHeight: sprite.frameHeight
-          });
+            frameHeight: sprite.frameHeight,
+          };
+
+          imgSprites.push(imgSprite);
         }
       });
     }
@@ -611,15 +610,15 @@ function (require, Coord, Pipe, Player, StopWatch,
 
 
       //Player Collision detection
-      var userHalf = user.width/2;
-          userHalfY = user.height/2;
+      const userHalf = user.width/2;
+      const userHalfY = user.height/2;
 
       if (user.y + userHalf >= cY) {
         // Hit the floor.
         user.die();
       }
 
-      for (var i = index+1; i < objList.length; i++) {
+      for (let i = index+1; i < objList.length; i++) {
         if ((objList[i].x - objList[i].width/2) > (user.x + userHalf)) {
           // player hasnt reached any pipes
           break;
@@ -646,7 +645,7 @@ function (require, Coord, Pipe, Player, StopWatch,
      * @return {Image}
      */
     function loadImage(src) {
-      var imgTmp = new Image();
+      const imgTmp = new Image();
 
       loadQueue--;
       $(imgTmp).one('load', resourceLoad);
