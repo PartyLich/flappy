@@ -188,9 +188,6 @@ define(['Coord', 'ball', 'animation'], function (
       // Restore context state.
       ctx.restore();
 
-      // //    print("filling text");
-      //    //ctx.fillText("(${pos.x.round()}, ${pos.y.round()})", pos.x - (pos.r/2).round(), pos.y);
-      // ctx.fillText("(${pos.x.round()}, ${pos.y.round()})", pos.x - (pos.r/2).round(), pos.y);
 
       // Advance animation frame.
       if (
