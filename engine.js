@@ -538,6 +538,35 @@ function (require, Coord, Pipe, Player, StopWatch,
       }
 
       // Player Collision detection
+      return handlePlayerCollision(index, obj);
+    }
+
+    /**
+     * [handlePipeCollision description]
+     * @param {object} obj
+     */
+    function handlePipeCollision(obj) {
+      if (obj.x + obj.width/2 <= 5) { // Pipe is off screen.
+        // Increment score.
+        mediator.publish('score:pipe');
+        score++;
+
+        // kill pipe
+        obj.die();
+        // add new pipe
+        addPipe();
+
+        return true;
+      }
+    }
+
+    /**
+    * [handlePlayerCollision description]
+    * @param {number} index
+    * @param  {object} obj [description]
+    * @return {boolean}     [description]
+    */
+    function handlePlayerCollision(index, obj) {
       const userHalf = user.width/2;
       const userHalfY = user.height/2;
 
@@ -563,25 +592,6 @@ function (require, Coord, Pipe, Player, StopWatch,
       }
 
       return false;
-    }
-
-    /**
-     * [handlePipeCollision description]
-     * @param {object} obj
-     */
-    function handlePipeCollision(obj) {
-      if (obj.x + obj.width/2 <= 5) { // Pipe is off screen.
-        // Increment score.
-        mediator.publish('score:pipe');
-        score++;
-
-        // kill pipe
-        obj.die();
-        // add new pipe
-        addPipe();
-
-        return true;
-      }
     }
 
     /**
