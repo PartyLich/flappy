@@ -1,4 +1,8 @@
-define(['Coord','ball', 'path', 'animation'], function(Coord, Ball, Path, Animation){
+define(['Coord', 'ball', 'animation'], function (
+    Coord,
+    Ball,
+    Animation,
+) {
   class Pipe extends Ball {
     /** Pipe object.
      * @param {Coord}  pos    Starting location
