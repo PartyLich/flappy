@@ -449,7 +449,7 @@ function (require, Coord, Pipe, Player, StopWatch,
         // Start the game!
         run();
       } else { // No mas.
-      // Load the next level
+        // Load the next level
         loadLevel(levels[curLevel]);
 
         // Start the game!
@@ -543,7 +543,7 @@ function (require, Coord, Pipe, Player, StopWatch,
       }
 
 
-      //Player Collision detection
+      // Player Collision detection
       const userHalf = user.width/2;
       const userHalfY = user.height/2;
 
