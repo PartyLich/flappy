@@ -88,45 +88,12 @@ define(['Coord', 'ball', 'animation'], function (
       this.loop = animation.repeat;
     }
 
-    /** Set this plane's heading.
-     * @param {Number} angle Heading in radians.
-     */
-    setHeading(angle) {
-      // Find size of velocity vector
-      const v = this.velocity();
-
-      // Find new x and y velocity components
-      this.vx = v * Math.cos(angle);
-      this.vy = v * Math.sin(angle);
-      //    console.log('Set heading v:'+ v +' angle:'+ angle +' vx:'+ this.vx +' vy:'+ this.vy);
-    }
-
     /** Set the drawing scale of this plane on interval [0,1].
      * @param {Number} factor
      */
     setScale(factor) {
       this.scale = factor <= this.minScale ? this.minScale : factor;
       this.r = Math.round((Math.max(this.width, this.height) / 2) * this.scale);
-    }
-
-    /** Get the plane's scalar velocity
-     * @return {Number}
-     */
-    velocity() {
-      return Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-    }
-
-    /** Set the plane's scalar velocity
-     * @param {Number} v  The new velocity.
-     */
-    setVelocity(v) {
-      const angle = this.getHeading();
-
-      // Find new x and y velocity components
-      this.vx = v * Math.cos(angle);
-      this.vy = v * Math.sin(angle);
-
-      // console.log('Set velocity v:'+v+' angle:'+angle+' vx:'+vx+' vy:'+vy);
     }
 
     /** Calculate the top left corner of the current frame.
