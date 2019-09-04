@@ -20,7 +20,7 @@ require.config({
     'path': 'models/path',
 //    'plane': 'models/plane',
     'player': 'models/player',
-    'pipe': 'models/pipe',
+    'pipe': 'models/Pipe',
     'StopWatch': 'models/StopWatch'
   },
   //Shim config FTW: http://requirejs.org/docs/api.html#config-shim
