@@ -568,25 +568,24 @@ function (require, Coord, Pipe, Player, StopWatch,
     * @return {boolean}     [description]
     */
     function handlePlayerCollision(index, obj) {
-      const userHalf = user.width/2;
-      const userHalfY = user.height/2;
-
-      if (user.y + userHalf >= cY) {
+      if (user.bottom >= cY) {
         // Hit the floor.
         user.die();
       }
 
       for (let i = index+1; i < objList.length; i++) {
-        if ((objList[i].x - objList[i].width/2) > (user.x + userHalf)) {
-          // player hasnt reached any pipes
+        const obstacle = objList[i];
+
+        if (obstacle.left > (user.right)) {
+          // player hasnt reached this pipe
           break;
         }
 
-        if (user.y + userHalfY > objList[i].y + objList[i].gap ||
-           user.y - userHalfY < objList[i].y - objList[i].gap) {
+        if (user.bottom > obstacle.y + obstacle.gap ||
+           user.top < obstacle.y - obstacle.gap) {
           // Start crash sequences
           obj.die();
-          objList[i].die();
+          obstacle.die();
 
           return true;
         }
