@@ -1,5 +1,6 @@
 define(function () {
-  function Animation(opts) {
+  class Animation {
+  constructor(opts) {
     this.firstFrame = 0;  //
     this.length = 0;     //
     this.repeat = 0;
@@ -8,7 +9,7 @@ define(function () {
     this.init(opts);
   }
 
-  Animation.prototype.init = function (opt) {
+  init(opt) {
     var key = null,
       default_args = {
         firstFrame : 0,
@@ -28,7 +29,8 @@ define(function () {
       //console.log(key + " = " + opt[key]);
       this[key] = opt[key];
     }
-  };
+  }
+  }
 
   return Animation;
 });
