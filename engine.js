@@ -618,7 +618,7 @@ function (require, Coord, Pipe, Player, StopWatch,
 
 
     return {
-      home: home,
+      home,
     };
   }
 
