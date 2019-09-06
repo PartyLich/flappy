@@ -1,7 +1,6 @@
-define(function (require) {
   /** Graphics Engine
    */
-  class Graphics {
+export default class Graphics {
     /**
      * Graphics class constructor
      * @param {Mediator} mediator mediator to utilize
@@ -106,6 +105,3 @@ define(function (require) {
       obj.img.src = buffer.toDataURL('image/png');
     }
   }
-
-  return Graphics;
-});
