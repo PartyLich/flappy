@@ -21,6 +21,7 @@ export default function Engine() {
   let frameCount = 0;
   let score = 0;
   let curLevel = 0;
+  // let collisions = 0;
   let loadQueue = 1;
   const stpFrame = new StopWatch();
   const bg = new Image();
@@ -80,7 +81,7 @@ export default function Engine() {
 
     // Reset scoring.
     if (curLevel == 0) score = 0;
-    collisions = 0;
+    // collisions = 0;
 
 
     // Place background canvas where it needs to be.
