@@ -1,15 +1,21 @@
-define(['require', 'Coord', 'pipe', 'player', 'StopWatch',
-  'Mediator', 'Graphics', 'Physics', 'mathLib',
-  'text!tmpl/table.jshaml', 'text!tmpl/startButton.jshaml', 'text!tmpl/score.jshaml'],
-function (require, Coord, Pipe, Player, StopWatch,
-    Mediator, Graphics, Physics) {
-  const {getRandomInt} = require('mathLib');
+import $ from 'jquery';
+import Haml from './lib/3rdParty/haml';
+import Coord from './models/Coord';
+import Pipe from './models/Pipe';
+import Player from './models/Player';
+import StopWatch from './models/StopWatch';
+import Mediator from './lib/mediator';
+import Graphics from './lib/Graphics';
+import Physics from './lib/physics';
+import {getRandomInt} from './lib/mathLib';
+
+
 
   /**
    * Main game engine
    * @return {object}
    */
-  function Engine() {
+export default function Engine() {
     let frameCount = 0;
     let score = 0;
     let curLevel = 0;
@@ -636,6 +642,3 @@ function (require, Coord, Pipe, Player, StopWatch,
       home,
     };
   }
-
-  return Engine;
-});
