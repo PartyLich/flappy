@@ -11,7 +11,7 @@
     "clean": "rimraf dist",
     "build": "webpack",
     "webpack": "webpack",
-    "watch": "webpack",
+    "watch": "webpack -w",
     "start": "http-server ./dist",
     "doc": "jsdoc src/*.js -r -P ./package.json -R README.md -d docs"
   },
