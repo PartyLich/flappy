@@ -1,0 +1,14 @@
+%table#scoreTable( style="position: absolute; z-index: 2;")
+  -# Table header row
+  %tr
+    %th Name
+    %th Date
+    %th Level
+    %th Score
+  -# Score row(s)
+  :each row in scores
+    %tr
+      %td #{ row.name }
+      %td #{ row.date }
+      %td #{ row.level }
+      %td #{ row.score }

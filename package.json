@@ -1,0 +1,52 @@
+{
+  "name": "flappy",
+  "version": "0.2.0",
+  "description": "Flappy times ahoy! It's like that helicopter game that spawned a popular clone, which somehow made a ton of coin.",
+  "main": "flappy.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf dist",
+    "build": "webpack",
+    "webpack": "webpack",
+    "watch": "webpack",
+    "start": "http-server ./dist",
+    "doc": "jsdoc src/*.js -r -P ./package.json -R README.md -d docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/PartyLich/flappy.git"
+  },
+  "keywords": [
+    "js",
+    "game",
+    "sprite"
+  ],
+  "author": "PartyLich",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/PartyLich/flappy#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "babel-tape-runner": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "eslint": "^5.16.0",
+    "eslint-config-google": "^0.13.0",
+    "file-loader": "^4.2.0",
+    "http-server": "^0.11.1",
+    "rimraf": "^3.0.0",
+    "style-loader": "^1.0.0",
+    "tape": "^4.10.1",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
+}
