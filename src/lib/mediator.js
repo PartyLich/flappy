@@ -1,4 +1,3 @@
-define(function (require) {
   /** Mediator pattern implementation.
    * based on previous work by @rpflorence
    * @return {Mediator}
@@ -73,5 +72,4 @@ define(function (require) {
     };
   };
 
-  return Mediator;
-});
+export default Mediator;
