@@ -1,8 +1,8 @@
-define(['Coord', 'ball', 'animation'], function (
-    Coord,
-    Ball,
-    Animation,
-) {
+import Coord from './Coord';
+import Ball from './Ball';
+import Animation from './Animation';
+
+
   /**
    * Pipe object
    * @extends Ball
@@ -291,5 +291,4 @@ define(['Coord', 'ball', 'animation'], function (
     }
   }
 
-  return Pipe;
-});
+export default Pipe;
