@@ -1,7 +1,3 @@
-define(function (require) {
-  const Coord = require('Coord');
-
-
   /** Physics Engine
   * @class
   */
@@ -60,5 +56,4 @@ define(function (require) {
     obj.vy = (Math.abs(newY) < terminal) ? newY : terminal * ydir;
   }
 
-  return Physics;
-});
+export default Physics;
