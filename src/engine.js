@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import Haml from './lib/3rdParty/haml';
 import Coord from './models/Coord';
 import Pipe from './models/Pipe';
 import Player from './models/Player';
@@ -9,6 +8,9 @@ import Graphics from './lib/Graphics';
 import Physics from './lib/physics';
 import {getRandomInt} from './lib/mathLib';
 
+// templates
+import tmplStartBtn from './tmpl/startButton';
+import tmplScore from './tmpl/score.js';
 
 
   /**
@@ -39,12 +41,6 @@ export default function Engine() {
     let hiScore = 0;
 
     // templates
-    const tmplTable = Haml( require('text!tmpl/table.jshaml'),
-        {customEscape: 'Haml.html_escape'});
-    const tmplStartBtn = Haml( require('text!tmpl/startButton.jshaml'),
-        {customEscape: 'Haml.html_escape'});
-    const tmplScore = Haml( require('text!tmpl/score.jshaml'),
-        {customEscape: 'Haml.html_escape'});
 
 
     // Get canvas contexts.
