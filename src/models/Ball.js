@@ -1,4 +1,5 @@
-define(['Coord'], function (Coord) {
+import Coord from './Coord';
+
   /**
    * Ball class. A point in 2space with radius.
    * @extends Coord
@@ -61,5 +62,4 @@ define(['Coord'], function (Coord) {
     }
   }
 
-  return Ball;
-});
+export default Ball;
