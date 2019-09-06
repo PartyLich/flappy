@@ -1,5 +1,3 @@
-define(function () {
-
   /** Coordinate object. Represents a point in 2-space.
    */
   class Coord {
@@ -70,5 +68,4 @@ define(function () {
     }
   }
 
-  return Coord;
-});
+export default Coord;
