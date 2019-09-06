@@ -1,4 +1,3 @@
-define(function () {
   /**
    * Animation class
    * @class
@@ -25,5 +24,4 @@ define(function () {
     }
   }
 
-  return Animation;
-});
+export default Animation;
