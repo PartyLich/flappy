@@ -1,4 +1,3 @@
-define(function (require) {
   /** StopWatch object constructor
    *
    */
@@ -46,5 +45,4 @@ define(function (require) {
     return this.running;
   };
 
-  return StopWatch;
-});
+export default StopWatch;
