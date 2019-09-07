@@ -1,4 +1,10 @@
-require(['coord', 'ball'], function(Coord, Ball) {
+// import assert from 'assert';
+import { assert } from 'chai';
+import { suite, test } from 'mocha';
+
+import Ball from '../src/models/Ball';
+import Coord from '../src/models/Coord';
+
 
 suite('Ball', function () {
 //        b1 = new Ball(10, 10),
@@ -87,5 +93,4 @@ suite('Ball', function () {
       assert.instanceOf(result, Coord);
     });
   });
-});
 });
