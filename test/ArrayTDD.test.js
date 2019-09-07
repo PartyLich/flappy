@@ -1,3 +1,8 @@
+// import assert from 'assert';
+import { assert } from 'chai';
+import { suite, test } from 'mocha';
+
+
 suite('Array', function () {
   suite('.push()', function () {
     test('should append a value', function () {
