@@ -1,4 +1,9 @@
-require(['coord'], function(Coord, Ball) {
+// import assert from 'assert';
+import { assert } from 'chai';
+import { suite, test } from 'mocha';
+
+import Coord from '../src/models/Coord';
+
 
 suite('Coord', function () {
   suite('.move()', function () {
@@ -85,5 +90,4 @@ suite('Coord', function () {
       assert.instanceOf(result, Coord);
     });
   });
-});
 });
