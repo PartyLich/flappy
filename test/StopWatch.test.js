@@ -1,4 +1,9 @@
-require(['StopWatch'], function(StopWatch) {
+// import assert from 'assert';
+import { assert, } from 'chai';
+import { suite, test, setup, } from 'mocha';
+
+import StopWatch from '../src/models/StopWatch';
+
 
 suite('StopWatch', function () {
   var watch;
@@ -74,6 +79,4 @@ suite('StopWatch', function () {
       assert.isFalse(watch.update());
     });
   });
-});
-
 });
