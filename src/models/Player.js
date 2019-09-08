@@ -17,7 +17,7 @@ class Player extends Ball {
    * @param {object}  opt  options
    * @param {Mediator} opt.mediator
    */
-  constructor({x, y}, img, alpha, frameWidth, frameHeight, {mediator}) {
+  constructor({x, y} = {}, img, alpha, frameWidth, frameHeight, {mediator} = {}) {
     // Super class constructor
     const radius = Math.round(Math.max(frameWidth, frameHeight) / 2);
     super({
