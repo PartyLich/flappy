@@ -97,6 +97,7 @@ class Pipe extends Ball {
   setScale(factor) {
     this.scale = factor <= this.minScale ? this.minScale : factor;
     this.r = Math.round((Math.max(this.width, this.height) / 2) * this.scale);
+    return this.scale;
   }
 
   /** Calculate the top left corner of the current frame.
