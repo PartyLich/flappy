@@ -1,4 +1,3 @@
-import Coord from './Coord';
 import Ball from './Ball';
 import Animation from './Animation';
 
