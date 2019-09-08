@@ -161,17 +161,6 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
-/old
-/planesJS-master.7z
-/testBall.js
-/testPath.js
-/test.html
-/test.js
-/bgs_spriters_resource.png
-/SNES - Smurfs 2 The - Jungle Critters.png
-/bird.psd
-/pipe.psd
-/player.psd
-/nyan
 
+# node
 /node_modules
