@@ -6,7 +6,7 @@ import StopWatch from '../src/models/StopWatch';
 
 
 suite('StopWatch', function () {
-  var watch;
+  let watch;
 
   setup(function () {
     watch = new StopWatch();
@@ -18,23 +18,31 @@ suite('StopWatch', function () {
     });
 
     test('running initializes to false', function () {
-      assert.isFalse(watch.running);
+      const expected = false;
+      const actual = watch.running;
+      assert.deepEqual(actual, expected);
     });
   });
 
   suite('.start()', function () {
     test('running is set to true', function () {
       watch.start();
-      assert.isTrue(watch.running);
+      const expected = true;
+      const actual = watch.running;
+      assert.deepEqual(actual, expected);
     });
   });
 
   suite('.stop()', function () {
-    test('sets running to false', function () {
+    test('sets running to false', function (done) {
+      const expected = false;
+
       watch.start();
       setTimeout(() => {
         watch.stop();
-        assert.isFalse(watch.running);
+        const actual = watch.running;
+        assert.deepEqual(actual, expected);
+        done();
       }, 20);
     });
   });
@@ -43,8 +51,7 @@ suite('StopWatch', function () {
     test('resets startTime and elapsedMilliseconds', function (done) {
       watch.start();
       setTimeout(() => {
-        var ms = watch.elapsedMilliseconds + 0,
-        start = watch.startTime + 0;
+        const start = watch.startTime;
 
         watch.reset();
         assert.deepEqual(watch.elapsedMilliseconds, 0);
@@ -56,31 +63,37 @@ suite('StopWatch', function () {
   });
 
   suite('.update()', function () {
-    test('updates elapseMilliseconds', function (done) {
+    test('updates elapsedMilliseconds', function (done) {
+      const expected = true;
       const ms = watch.elapsedMilliseconds;
       watch.start();
       setTimeout(() => {
         watch.update();
-        assert.deepEqual(watch.elapsedMilliseconds > ms, true);
+        assert.deepEqual(watch.elapsedMilliseconds > ms, expected);
         done();
       }, 20);
     });
 
     test('does not update if running is false', function (done) {
-      var ms = watch.elapsedMilliseconds;
+      const expected = watch.elapsedMilliseconds;
       watch.stop();
       setTimeout(() => {
         watch.update();
-        assert.equal(watch.elapsedMilliseconds, ms);
+        assert.equal(watch.elapsedMilliseconds, expected);
         done();
       }, 20);
     });
 
     test('returns running state', function () {
       watch.start();
-      assert.isTrue(watch.update());
+      let expected = watch.running;
+      let actual = watch.update();
+      assert.deepEqual(actual, expected, 'matches running state after start');
+
       watch.stop();
-      assert.isFalse(watch.update());
+      expected = watch.running;
+      actual = watch.update();
+      assert.deepEqual(actual, expected);
     });
   });
 });
