@@ -4,10 +4,11 @@
  * @param  {object[]}  props.scores [description]
  * @constructor
  */
-export default function Score({scores}) {
+export default function Score({id = 'scoreTable', scores}) {
   const element = document.createElement('table');
 
   element.style = 'position: absolute; z-index: 2;';
+  element.id = id;
 
   const tr = document.createElement('tr');
   element.appendChild(tr);

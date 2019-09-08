@@ -300,27 +300,25 @@ export default function Engine() {
    * @param {String} url
    */
   function loadScores(url) {
-    let table;
     const render = tmplScore({
       scores: [
-        { "name": "Last", "score": score },
-        { "name": "Best", "score": hiScore }
-      ]
+        {name: 'Last', score: score},
+        {name: 'Best', score: hiScore},
+      ],
     });
 
-    table = $('#scoreTable');
+    const table = $('#scoreTable');
 
     // Create the table if it doesnt exist.
     if (!table.length) {
-      table = $(render);
       // Add table to doc
-      $('body').append(table);
+      $('body').append(render);
     } else {
-      table.html(render);
+      table.replaceWith(render);
     }
 
     // TODO: just give it a canvas sized div and center the darn thing
-    table.css({
+    $('#scoreTable').css({
       'position': 'absolute',
       'top': $(cvsFront).height() * .35 + 'px',
       'left': $(cvsFront).width() *.25 + 'px',
