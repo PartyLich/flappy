@@ -10,8 +10,7 @@ export default function Score({id = 'scoreTable', scores}) {
   element.style = 'position: absolute; z-index: 2;';
   element.id = id;
 
-  const tr = document.createElement('tr');
-  element.appendChild(tr);
+  const tr = element.insertRow();
   const th1 = document.createElement('th');
   const th2 = document.createElement('th');
   th2.innerHTML = 'Score';
@@ -19,7 +18,7 @@ export default function Score({id = 'scoreTable', scores}) {
   tr.appendChild(th2);
 
   for (const {name, score} of scores) {
-    const tr = document.createElement('tr');
+    const tr = element.insertRow();
     const td1 = document.createElement('td');
     td1.innerText = name;
     const td2 = document.createElement('td');
@@ -27,7 +26,6 @@ export default function Score({id = 'scoreTable', scores}) {
 
     tr.appendChild(td1);
     tr.appendChild(td2);
-    element.appendChild(tr);
   }
 
   return element;
