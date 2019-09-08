@@ -121,6 +121,7 @@ export default function Engine() {
     let obj = null;
     // Make sure we're loaded.
     if (stillLoading()) {
+      drawLoadMessage(ctxFront);
       return;
     }
 
@@ -182,18 +183,21 @@ export default function Engine() {
    * @return {boolean} true is resources are still loading, false otherwise
    */
   function stillLoading() {
-    if (loadQueue < 1) {
-      const loadingText = 'LOADING...';
-      const txtWidth = ctxFront.measureText(loadingText).width;
-      ctxFront.save();
-      ctxFront.font = 'bold 30px sans-serif';
-      ctxFront.fillText(loadingText, cX / 2 - txtWidth / 2, cY / 2);
-      ctxFront.restore();
-      console.log('loadQueue', loadQueue);
-      return true;
-    }
+    return (loadQueue < 1);
+  }
 
-    return false;
+  /**
+   * Render loading message to canvas
+   * @param {CanvasRenderingContext2D} ctx  canvas context to draw on
+   */
+  function drawLoadMessage(ctx) {
+    const LOADING_TEXT = 'LOADING...';
+    const txtWidth = ctx.measureText(LOADING_TEXT).width;
+    ctx.save();
+    ctx.font = 'bold 30px sans-serif';
+    ctx.fillText(LOADING_TEXT, cX / 2 - txtWidth / 2, cY / 2);
+    ctx.restore();
+    console.log('loadQueue', loadQueue);
   }
 
   function endGame() {
