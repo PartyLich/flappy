@@ -19,7 +19,7 @@ class Pipe extends Ball {
    * @param {object}  opt  options object
    * @param {Mediator} opt.mediator  mediator to utilize
    */
-  constructor({x, y}, img, alpha, frameWidth, frameHeight, {mediator}) {
+  constructor({x, y} = {}, img, alpha, frameWidth, frameHeight, {mediator} = {}) {
     const radius = Math.round(Math.max(frameWidth, frameHeight) / 2);
     super({
       x,
