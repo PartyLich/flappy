@@ -32,44 +32,48 @@ suite('StopWatch', function () {
   suite('.stop()', function () {
     test('sets running to false', function () {
       watch.start();
-      setTimeout(20);
-      watch.stop();
-      assert.isFalse(watch.running);
+      setTimeout(() => {
+        watch.stop();
+        assert.isFalse(watch.running);
+      }, 20);
     });
   });
 
   suite('.reset()', function () {
-    test('resets startTime and elapsedMilliseconds', function () {
+    test('resets startTime and elapsedMilliseconds', function (done) {
       watch.start();
-      setTimeout(50);
-      watch.update();
-      var ms = watch.elapsedMilliseconds + 0,
-          start = watch.startTime + 0;
+      setTimeout(() => {
+        var ms = watch.elapsedMilliseconds + 0,
+        start = watch.startTime + 0;
 
-      watch.reset();
-      assert.equal(watch.elapsedMilliseconds, 0);
-      assert(ms > watch.elapsedMilliseconds, 'ms '+ms+' > reset elapsedMilliseconds' + watch.elapsedMilliseconds);
-      assert(start < watch.startTime, 'original startTime ('+start+') < reset startTime('+watch.StartTime+')');
+        watch.reset();
+        assert.deepEqual(watch.elapsedMilliseconds, 0);
+        assert.isBelow(start, watch.startTime);
+        done();
+      }, 30);
+      watch.update();
     });
   });
 
   suite('.update()', function () {
-    test('updates elapseMilliseconds', function () {
-      var ms = watch.elapsedMilliseconds;
+    test('updates elapseMilliseconds', function (done) {
+      const ms = watch.elapsedMilliseconds;
       watch.start();
-      setTimeout(20);
-
-      watch.update();
-      assert(watch.elapsedMilliseconds > ms);
+      setTimeout(() => {
+        watch.update();
+        assert.deepEqual(watch.elapsedMilliseconds > ms, true);
+        done();
+      }, 20);
     });
 
-    test('does not update if running is false', function () {
+    test('does not update if running is false', function (done) {
       var ms = watch.elapsedMilliseconds;
       watch.stop();
-      setTimeout(20);
-
-      watch.update();
-      assert.equal(watch.elapsedMilliseconds, ms);
+      setTimeout(() => {
+        watch.update();
+        assert.equal(watch.elapsedMilliseconds, ms);
+        done();
+      }, 20);
     });
 
     test('returns running state', function () {
