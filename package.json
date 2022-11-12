@@ -48,7 +48,7 @@
     "style-loader": "^1.0.0",
     "tape": "^4.10.1",
     "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.8"
+    "webpack-cli": "^3.3.12"
   },
   "dependencies": {
     "jquery": "^3.5.0"
