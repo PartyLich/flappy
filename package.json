@@ -41,7 +41,7 @@
     "eslint-config-google": "^0.13.0",
     "esm": "^3.2.25",
     "file-loader": "^4.2.0",
-    "http-server": "^0.11.1",
+    "http-server": "^0.11.2",
     "jsdom": "^15.1.1",
     "mocha": "^6.2.0",
     "rimraf": "^3.0.0",
